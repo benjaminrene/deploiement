@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Merci de vous connecter | {{block.super}}{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+<form class="form-horizontal" method="post" action="/login/">
+    {% csrf_token %}
+    <div class="control-group">
+      <label class="control-label" for="id_username">Utilisateur</label>
+    <div class="controls">
+        {{ form.username }}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="id_password">Mot de passe</label>
+    <div class="controls">
+        {{ form.password }}
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+        <input type="hidden" name="next" value="{{next}}" />
+        <button type="submit" class="btn">Connexion</button>
+    </div>
+  </div>
+</form>
+        {% if form.errors %}
+            <p class="text-error">Votre nom ou votre mot de passe sont incorrects</p>
+        {% endif %}
+{% endblock content %}
